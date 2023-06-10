@@ -2,7 +2,6 @@ import sqlite3
 from collections import Counter
 import argparse
 import sys
-# import flask
 
 # pip install pdoc (python doc)
 # pdoc ./my_project.py (spustíme pro daný soubor)
