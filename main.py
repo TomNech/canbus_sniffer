@@ -178,7 +178,7 @@ if __name__ == '__main__':
 
         for key, value in dictionary.get_counter_list.items():
 
-            if can_num_1 <= value <= can_num_2 or value <= can_num_1 and value >= can_num_2:
+            if can_num_1 >= value and can_num_2 <= value or can_num_1 <= value and can_num_2 >= value:
                 filter_msg.update({key: value})
 
         for key, value in filter_msg.items():
