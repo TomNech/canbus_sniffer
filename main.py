@@ -155,12 +155,30 @@ if __name__ == '__main__':
     def filter_value_msg():
         filter_msg = {}
         num = 0
-        can_num = int(input("Zadejte počet výskytů CAN zprávy: \n"))
+        can_num = int(input("Zadejte počet výskytů CAN zprávy: "))
 
         # print(dictionary.get_counter_list.items())
 
         for key, value in dictionary.get_counter_list.items():
             if value == can_num:
+                filter_msg.update({key: value})
+
+        for key, value in filter_msg.items():
+            num += 1
+            print(f"{num}.\t CAN zpráva: {key} \t POČET: {value}")
+        print()
+
+
+    def filter_range_value():
+        filter_msg = {}
+        num = 0
+
+        can_num_1 = int(input("Zadejte první číslo: "))
+        can_num_2 = int(input("Zadejte druhé číslo: "))
+
+        for key, value in dictionary.get_counter_list.items():
+
+            if can_num_1 <= value <= can_num_2 or value <= can_num_1 and value >= can_num_2:
                 filter_msg.update({key: value})
 
         for key, value in filter_msg.items():
@@ -178,7 +196,8 @@ if __name__ == '__main__':
             print("1 - Zobrazit všechny nalezené zprávy")
             print("2 - Zobrazit seznam podle vybraného ID CAN zprávy")
             print("3 - Zobrazit seznam podle počtu výskytů CAN zprávy")
-            print("4 - Ukončit program")
+            print("4 - Zobrazit seznam podle rozsahu výskytů CAN zprávy")
+            print("5 - Ukončit program")
             print("--------------------------------------------------")
 
             choice = int(input("Zadejte volbu: "))
@@ -193,6 +212,9 @@ if __name__ == '__main__':
                 filter_value_msg()
 
             elif choice == 4:
+                filter_range_value()
+
+            elif choice == 5:
                 end()
 
             else:
