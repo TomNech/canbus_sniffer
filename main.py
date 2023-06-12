@@ -1,102 +1,10 @@
 import sqlite3
-from collections import Counter
 import argparse
 import sys
-
-# pip install pdoc (python doc)
-# pdoc ./my_project.py (spustíme pro daný soubor)
-
-class Loader:
-    def __init__(self, file_stream):
-        self.file = file_stream
-        self.data = []
-
-    def __str__(self):
-        return f"Soubor .txt má {len(self.data)} řádků (zpráv)\n"
-
-    def __len__(self):
-        return len(self.data)
-
-    def load_file(self):
-
-        try:
-            with open(self.file) as f:
-                for x in f:
-                    self.data.append(x.strip())
-        except FileNotFoundError:
-            print("Neplatná cesta k souboru")
-
-    def get_data(self, line_number):
-        return self.data[line_number]
-
-
-class Parser:
-    def __init__(self):
-        self.id = 0
-        self.data_length = 0
-        self.data = ""
-
-    def parse_line(self, line):
-        temporary = line.split()
-        self.id = str(temporary[0])
-        self.data_length = int(temporary[1])
-        self.data = temporary[2:]
-
-    @property
-    def get_id(self):
-        return self.id
-
-    @property
-    def get_data_length(self):
-        return self.data_length
-
-    @property
-    def get_data(self):
-        return self.data
-
-    def __str__(self):
-        return f"ID: {self.get_id}, DATA LEN: {self.get_data_length}, DATA: {self.get_data}"
-
-
-class MessageCounter:
-    def __init__(self):
-        # self.count = 1
-        # self.inventory = {}
-        self.c = Counter()
-
-    def add_to_dict(self, can_messages):
-        self.can_messages = can_messages
-        self.c.update([can_messages])
-
-    @property
-    def get_counter_list(self):
-        return self.c
-
-
-class SQLite:
-    def __init__(self, database_name):
-        self.conn = sqlite3.connect(database_name)
-        self.create_table()
-
-    def create_table(self):
-        self.sql = '''
-        CREATE TABLE IF NOT EXISTS CAN_messages (
-            id INTEGER,
-            data_length INTEGER,
-            data TEXT
-        )
-        '''
-        self.conn.execute(self.sql)
-        self.conn.commit()
-
-    def insert_message(self, id, data_len, data):
-        pass
-        self.sql = '''
-        INSERT INTO messages (id, data_length, data)
-        VALUES (?, ?, ?)
-        '''
-        self.conn.execute()
-        self.conn.commit()
+from loader import Loader
+from parser import Parser
+from counter import MessageCounter
+from database import SQLite
 
 
 if __name__ == '__main__':
@@ -111,11 +19,15 @@ if __name__ == '__main__':
     args = parser.parse_args()
     loader = Loader(args.filename)
     loader.load_file()
-    # parser = Parser()
+    parser = Parser()
     dictionary = MessageCounter()
+    # database = SQLite(args.database)
 
     for index in range(len(loader)):
         dictionary.add_to_dict(loader.get_data(index))
+        # parser.parse_line(loader.get_data(index))
+        # data = parser.id
+        # database.insert_data(data)
 
     def all_msg():
 
