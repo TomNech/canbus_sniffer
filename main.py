@@ -13,7 +13,7 @@ if __name__ == '__main__':
         epilog='')
 
     parser.add_argument('-f', '--filename', help="Zadej název souboru")
-    parser.add_argument('-db', '--database', help="Zadej název souboru")
+    # parser.add_argument('-db', '--database', help="Zadej název souboru")
     args = parser.parse_args()
     loader = Loader(args.filename)
     loader.load_file()
