@@ -28,3 +28,8 @@ Plánuji dál rozšiřovat tento projekt. Některé z navrhovaných rozšířen�
 * Vylepšená vizualizace: Přidám grafické rozhraní (GUI), které umožní uživatelům jednodušší sledování a analýzu zachycených zpráv.
 * Live monitorování: Software bude běžet v reálném čase přímo na sériové lince připojené k autu přes USB. To umožní okamžitý přístup k novým zprávám a jejich analýzu v reálném čase.
 * Dekódování zpráv: Zprávy, které jsou zachyceny ve formátu HEX (šestnáctková soustava), budou v softwaru dekódovány a převedeny na formát BIN (dvojková soustava). Tím získám srozumitelná data pro další analýzu a zpracování.
+
+## Spuštění aplikace
+* Všechny soubory nahrajte do jedné složky, jako projekt.
+* Pomocí terminálu najděte cestu složky projektu
+* zadejte příkaz do terminálu bez uvozovek pro spuštění aplikace " python.exe .\main.py -f CAN.txt "
